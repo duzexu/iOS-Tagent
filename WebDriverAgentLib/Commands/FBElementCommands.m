@@ -494,7 +494,12 @@
     return FBResponseWithStatus([FBCommandStatus invalidArgumentErrorWithMessage:error.localizedDescription
                                                                        traceback:nil]);
   }
-  [target tap];
+  NSNumber *duration = request.arguments[@"duration"];
+  if ([duration doubleValue] > 0) {
+    [target pressForDuration:[duration doubleValue]];
+  }else{
+    [target tap];
+  }
   return FBResponseWithOK();
 }
 
